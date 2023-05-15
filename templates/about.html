@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>このサイトについて - Text Splitter</title>
+    <style>
+        /* 以前のCSSスタイルは省略しています。変更はありません。 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4b4b4b;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #f9f9f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #4b4b4b;
+            color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1c1c1c;
+        }
+
+        h2 {
+            color: #4b4b4b;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .result-text {
+            width: 90%;
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            resize: none;
+            overflow: hidden;
+        }
+
+        .copy-button {
+            width: 10%;
+            padding: 5px;
+            background-color: #4b4b4b;
+            color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .copy-button:hover {
+            background-color: #1c1c1c;
+        }
+
+        footer {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: transparent;
+            padding: 0;
+            border-top: none;
+        }
+
+        footer a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+            background-color: #e0e0e0;
+        }
+
+        .twitter-button {
+            display: inline-flex;
+            align-items: center;
+            width: auto;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #1DA1F2;
+            color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .twitter-button:hover span { /* span要素に対して太字スタイルを適用 */
+            font-weight: bold;
+        }
+
+        .twitter-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>このサイトについて</h1>
+    </header>
+    <div class="container">
+        <h2>名前の通り、長い文章を指定した文字数で分割するサービスです。</h2>
+        <p>文字数に収まるように読点で区切ったり、URLは削除/抽出することも可能です。<br>このサイトのほとんどは、ChatGPT-4によって生成されました。</p>
+        <p>運営：<a href="https://iuto.work" target="_blank">いうと</a><a href="https://twitter.com/iuto_025" target="_blank">（@iuto_025）</a></p>
+        <a href="https://twitter.com/intent/tweet?text=%E3%81%93%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%20-%20Text%20Splitter&url={{ request.url_root }}about&hashtags=%E6%96%87%E7%AB%A0%E5%88%86%E5%89%B2%E3%83%84%E3%83%BC%E3%83%AB&via=iuto_025" target="_blank" class="twitter-button">
+            <img src="images/twitter.png" alt="Twitter icon" class="twitter-icon"> 
+            <span>Twitterでつぶやく</span> <!-- <span>タグを追加 -->
+        </a>                       
+        <h2>よくある質問</h2>
+        <h3>Q.このサイトは無料で使えますか？</h3>
+        <p>A.はい、無料でお使い頂けます。</p>
+        <h3>Q.入力したデータは見えないようになっていますか？</h3>
+        <p>A.入力されたデータはサーバー上で処理され、通常は運営者が閲覧することはありません。ただし、完全なプライバシーやセキュリティを保証することはできません。プライバシーを尊重し、適切な対策を講じることを心がけていますが、インターネット上での完全な安全性は保証できませんので、ご理解のほどお願いいたします。</p>
+        <h3>Q.すべてのURLと読点に対応していますか？</h3>
+        <p>正規表現を用いており、最も一般的なURLの形式には対応しています。特殊なURLには対応できないかもしれません。またここでの読点は 。 だけのことを表しており、ピリオドなどには対応していません。ピリオドは読点以外の意味でも使用されることがあり、搭載することによって、意図しない部分で切れてしまうことも考えられるためです。</p>
+        </p>
+        <h3>Q.今後追加予定の機能はありますか？</h3>
+        <p>ChatGPTなどを利用し、指定した文字数以下かつ、特定のテーマや話題に沿った文章の適切な箇所でカットする機能も搭載できればと思っています。しかしほとんどをChatGPT-4によって生成しているため、技術的に可能かどうか分かりません。また、あくまでも趣味で運営しているサービスですので、この機能が確実に搭載される保証はありません。</p>
+    </div>
+</body>
+<footer>
+    <a href="index.html">戻る</a>
+</footer>
+</html>

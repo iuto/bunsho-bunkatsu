@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>文章分割ツール</title>
+    
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4b4b4b;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #f9f9f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #4b4b4b;
+            color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1c1c1c;
+        }
+
+        h2 {
+            color: #4b4b4b;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .result-text {
+            width: 90%;
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            resize: none;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .copy-button {
+            width: 10%;
+            padding: 5px;
+            background-color: #4b4b4b;
+            color: #f9f9f9;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .copy-button:hover {
+            background-color: #1c1c1c;
+        }
+
+        footer {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: transparent;
+            padding: 0;
+            border-top: none;
+        }
+
+        footer a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+            background-color: #e0e0e0;
+        }
+
+        .split-option {
+        display: inline-block;
+        margin-right: 10px;
+        }
+
+        .split-option label {
+        margin-left: 5px;
+        cursor: pointer;
+        }
+
+        .split-option input[type="radio"] {
+        display: none;
+        }
+
+        .split-option .custom-radio {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid #cccccc;
+        margin-right: 5px;
+        position: relative;
+        }
+
+        .split-option .custom-radio::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 4px;
+        background-color: #cccccc;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        }
+
+        .split-option input[type="radio"]:checked + .custom-radio::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 4px;
+        background-color: #000000;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+        }
+
+        .split-option input[type="radio"]:checked ~ label {
+            font-weight: bold;
+        }
+
+        fieldset {
+        border: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>文章分割ツール</h1>
+    </header>   
+    <div class="container">
+        <form method="POST" action="/">
+            <label for="text">文章:</label>
+            <textarea name="text" id="text" rows="10"></textarea>
+            <label for="character_limit">文字数:</label>
+            <input type="number" name="character_limit" id="character_limit" value="2000"><br><br>
+            <fieldset>
+                <label for="url_option">URLオプション:</label><br>
+                <div class="url-options">
+                    <div class="split-option">
+                        <input type="radio" id="no_url" name="url_option" value="no_url" checked>
+                        <label for="no_url">なし</label>
+                    </div>
+                    <div class="split-option">
+                        <input type="radio" id="remove" name="url_option" value="remove">
+                        <label for="remove">URLを削除</label>
+                    </div>
+                    <div class="split-option">
+                        <input type="radio" id="extract" name="url_option" value="extract">
+                        <label for="extract">URLを抽出</label>
+                    </div>
+                </div>                
+            </fieldset><br><br>
+            <label for="split_by">分割方法:</label><br>
+            <div class="split-options">
+                <div class="split-option">
+                    <input type="radio" id="char" name="split_by" value="char" checked>
+                    <label for="char">文字数で区切る</label>
+                </div>
+                <div class="split-option">
+                    <input type="radio" id="period" name="split_by" value="period">
+                    <label for="period">読点で区切る</label>
+                </div>
+            </div>            
+            <br><br>
+            <input type="submit" value="分割する">
+        </form>
+
+        {% if text_length_dicts %}
+        <div class="container">
+            <h2>結果:</h2>
+            <p>合計文字数: {{ total_length }}</p>
+            <p>分割数: {{ text_length_dicts|length }}</p>
+            <ul>
+                {% for item in text_length_dicts %}
+                <div class="result-item">
+                    <div class="result-text">{{ item.text }}</div>
+                    <div>文字数: {{ item.length }}</div>
+                    <button class="copy-button" onclick="copyTextToClipboard(this.previousElementSibling.previousElementSibling.textContent)">コピー</button>
+                </div>            
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if url_counts %}
+        <div class="container">
+            <h2>抽出したURL:</h2>
+            <ul>
+                {% for url, count in url_counts.items() %}
+                <li>
+                    <div class="result-item">
+                        <div class="result-text">{{ url }}</div>
+                        <div>回数: {{ count }}</div>
+                        <button class="copy-button" onclick="copyTextToClipboard(this.previousElementSibling.previousElementSibling.textContent)">コピー</button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    <script>
+        function copyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("Copy");
+            textArea.remove();
+        }
+    </script>
+    <footer>
+        <a href="about.html">このサイトについて</a>
+    </footer>
+</body>
+</html>
